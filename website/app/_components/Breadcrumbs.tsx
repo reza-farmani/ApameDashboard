@@ -3,8 +3,11 @@
 import { useBreadcrumbStore } from "../state/breadcrumpStore";
 import Link from "next/link";
 
+
+
 export default function Breadcrumbs() {
-  const breadcrumb = useBreadcrumbStore((s) => s.breadcrumb);
+
+  const breadcrumb = useBreadcrumbStore(s => s.breadcrumb) ?? [];
 
   return (
     <nav
@@ -12,7 +15,8 @@ export default function Breadcrumbs() {
       className="text-lg text-gray-800 mb-6 font-bold ml-auto max-w-max"
     >
       <ol className="flex flex-row-reverse items-center gap-2">
-        {breadcrumb
+        {Array.isArray(breadcrumb) &&
+         breadcrumb
           .slice()
           .reverse()
           .map((item) => (
