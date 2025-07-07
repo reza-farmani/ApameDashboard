@@ -19,13 +19,15 @@ export const sidebarMenu = [
     submenu: [
       {
         title: "محصولات پر فروش",
-        slug: "/products/mostsales",
+        to: "/products/mostsales",
       },
       {
+        title: "زیرمنو بیشتر",
+        to: "/products/nested",
         submenu: [
           {
-            title: "- 2 محصولات پر فروش",
-            slug: "/products/mostsales2",
+            title: "محصولات پر فروش ۲",
+            to: "/products/nested/nested",
           },
         ],
       },
@@ -38,7 +40,7 @@ export const sidebarMenu = [
     submenu: [
       {
         title: "افزودن کاربر جدید",
-        slug: "/account/adduser",
+        to: "/account/adduser",
       },
     ],
   },
@@ -49,7 +51,7 @@ export const sidebarMenu = [
     submenu: [
       {
         title: "افزودن مقاله جدید",
-        slug: "/blogs/newblog",
+        to: "/blogs/newblog",
       },
     ],
   },
