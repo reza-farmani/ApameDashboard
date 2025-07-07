@@ -4,16 +4,19 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useBreadcrumbStore } from "../state/breadcrumpStore";
 import { sidebarMenu } from "../constants/menu";
-import { BreadcrumbItem } from "@/types/types"; 
+import { BreadcrumbItem, MenuItem } from "../../types/types"; 
+
+
+
 
 function findBreadcrumb(
   path: string,
-  menu = sidebarMenu,
+  menu: MenuItem[] = sidebarMenu,
   parents: BreadcrumbItem[] = []
 ): BreadcrumbItem[] {
   for (const item of menu) {
     const current: BreadcrumbItem = {
-      title: item.text ?? item.title,
+      title: item.text ?? item.title ?? "بدون عنوان",
       to: item.to,
     };
 
@@ -38,5 +41,5 @@ export function useBreadcrumbSetter() {
     setBreadcrumb(crumbs);
     if (crumbs.length)
       document.title = "آپامه - " + crumbs[crumbs.length - 1].title;
-  }, [pathname]);
+  }, [pathname,  setBreadcrumb]);
 }

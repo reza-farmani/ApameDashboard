@@ -1,10 +1,18 @@
+import { create } from 'zustand';
+import { BreadcrumbItem } from '@/types/types';
 
-import { create } from "zustand";
-import { BreadcrumbItem } from "@/types/types"; 
+interface BreadcrumbState {
+  breadcrumb: BreadcrumbItem[];
+  crumbs: BreadcrumbItem[];
+  setBreadcrumb: (crumbs: BreadcrumbItem[]) => void;
+}
 
-export const useBreadcrumbStore = create((set) => ({
-  breadcrumb: [] as BreadcrumbItem[],
-  setBreadcrumb: (items: BreadcrumbItem[]) => set({ breadcrumb: items }),
+export const useBreadcrumbStore = create<BreadcrumbState>((set) => ({
+  breadcrumb: [], 
+  crumbs: [],
+  setBreadcrumb: (crumbs) => set({ 
+    crumbs,
+    breadcrumb: crumbs 
+  }),
 }));
-
 

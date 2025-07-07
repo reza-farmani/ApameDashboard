@@ -4,6 +4,7 @@ import { Lalezar } from "next/font/google";
 import SideNav from "./_components/SideNav";
 import Breadcrumbs from "./_components/Breadcrumbs";
 import BreadcrumbInitializer from "./_components/BreadcrumbInitializer";
+import { ReactNode } from "react";
 
 const font = Lalezar({
   subsets: ["arabic"],
@@ -19,7 +20,7 @@ export const metadata = {
   description: "",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="fa">
       <body dir="rtl" className={font.className}>
