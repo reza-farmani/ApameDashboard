@@ -18,9 +18,9 @@ export default function Breadcrumbs() {
           .map((item) => (
             <li key={item.to} className="flex items-center text-lg">
               <span className="mx-2 text-gray-500">/</span>
-              <Link href={item.to} className="hover:underline">
+              <h4 className="hover:underline">
                 {item.title}
-              </Link>
+              </h4>
             </li>
           ))}
         <li>
