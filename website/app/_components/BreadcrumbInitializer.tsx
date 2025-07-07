@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useBreadcrumbSetter } from '../hooks/useBreadcrumbSetter';
+import { useBreadcrumbSetter } from "../hooks/useBreadcrumbSetter";
 
 export default function BreadcrumbInitializer() {
   useBreadcrumbSetter(); 

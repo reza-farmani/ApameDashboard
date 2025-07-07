@@ -1,5 +1,5 @@
 "use client";
-import { useSidebarStore } from "../hooks/sidebarStore"; 
+import { useSidebarStore } from "../hooks/sidebarStore";
 import Link from "next/link";
 import { sidebarMenu } from "../constants/menu";
 
@@ -51,21 +51,30 @@ function SideBar() {
 
           return (
             <li key={item.to}>
-              <button
-                onClick={() => hasSubmenu && toggleMenu(item.to)}
-                className="flex items-center gap-3 text-gray-600 text-base font-medium p-3 px-6 w-full text-left transition-all duration-300 hover:text-gray-800 hover:bg-gray-100 rounded"
-                type="button"
-              >
-                <Icon />
-                <span>{item.text}</span>
-                {hasSubmenu && (
-                  <span className="mr-auto select-none">
-                    {isOpen ? "▲" : "▼"}
-                  </span>
-                )}
-              </button>
-
-              {hasSubmenu && isOpen && renderSubMenu(item.submenu)}
+              {hasSubmenu ? (
+                <>
+                  <button
+                    onClick={() => toggleMenu(item.to)}
+                    className="flex items-center gap-3 text-gray-600 text-base font-medium p-3 px-6 w-full text-left transition-all duration-300 hover:text-gray-800 hover:bg-gray-100 rounded"
+                    type="button"
+                  >
+                    <item.icon />
+                    <span>{item.text}</span>
+                    <span className="mr-auto select-none">
+                      {isOpen ? "▲" : "▼"}
+                    </span>
+                  </button>
+                  {isOpen && renderSubMenu(item.submenu)}
+                </>
+              ) : (
+                <Link
+                  href={item.to}
+                  className="flex items-center gap-3 text-gray-600 text-base font-medium p-3 px-6 w-full text-left transition-all duration-300 hover:text-gray-800 hover:bg-gray-100 rounded"
+                >
+                  <item.icon />
+                  <span>{item.text}</span>
+                </Link>
+              )}
             </li>
           );
         })}

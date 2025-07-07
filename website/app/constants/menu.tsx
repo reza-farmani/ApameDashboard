@@ -22,12 +22,12 @@ export const sidebarMenu = [
         to: "/products/mostsales",
       },
       {
-        title: "زیرمنو بیشتر",
-        to: "/products/nested",
+        title: "محصولات برتر",
+        to: "/products/top",
         submenu: [
           {
-            title: "محصولات پر فروش ۲",
-            to: "/products/nested/nested",
+            title: "محصولات با کیفیت",
+            to: "/products/quality",
           },
         ],
       },
