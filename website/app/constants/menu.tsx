@@ -36,11 +36,11 @@ export const sidebarMenu = [
   {
     to: "/account",
     icon: HiOutlineUser,
-    text: "حساب کاربری",
+    text: "کاربر ها",
     submenu: [
       {
         title: "افزودن کاربر جدید",
-        to: "/account/adduser",
+        to: "/user/adduser",
       },
     ],
   },
