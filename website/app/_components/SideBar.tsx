@@ -3,10 +3,25 @@ import { useSidebarStore } from "../hooks/sidebarStore";
 import Link from "next/link";
 import { sidebarMenu } from "../constants/menu";
 
+
+type MenuItem = {
+  title: string;
+  to: string;
+} & (
+  | {
+      submenu: MenuItem[];
+    }
+  | {
+      submenu?: undefined;
+    }
+);
+
+
+
 function SideBar() {
   const { openMenus, toggleMenu } = useSidebarStore();
 
-  const renderSubMenu = (submenu: any[], level = 1) => {
+  const renderSubMenu = (submenu: MenuItem[], level = 1) => {
     return (
       <ul className={`ml-${level * 4} mt-1 flex flex-col gap-1`}>
         {submenu.map((sub, index) => {
@@ -45,7 +60,7 @@ function SideBar() {
     <nav>
       <ul className="flex flex-col gap-2">
         {sidebarMenu.map((item) => {
-          const Icon = item.icon;
+          // const Icon = item.icon;
           const hasSubmenu = item.submenu && item.submenu.length > 0;
           const isOpen = openMenus[item.to];
 
@@ -64,7 +79,7 @@ function SideBar() {
                       {isOpen ? "▲" : "▼"}
                     </span>
                   </button>
-                  {isOpen && renderSubMenu(item.submenu)}
+                  {isOpen && item.submenu && renderSubMenu(item.submenu)}
                 </>
               ) : (
                 <Link
