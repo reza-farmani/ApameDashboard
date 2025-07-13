@@ -3,10 +3,16 @@ import { useSidebarStore } from "../hooks/sidebarStore";
 import Link from "next/link";
 import { sidebarMenu } from "../constants/menu";
 
+interface SubMenuItem {
+  to: string;
+  title: string;
+  submenu?: SubMenuItem[];
+}
+
 function SideBar() {
   const { openMenus, toggleMenu } = useSidebarStore();
 
-  const renderSubMenu = (submenu: any[], level = 1) => {
+  const renderSubMenu = (submenu: SubMenuItem[], level = 1) => {
     return (
       <ul className={`ml-${level * 4} mt-1 flex flex-col gap-1`}>
         {submenu.map((sub, index) => {
@@ -24,7 +30,7 @@ function SideBar() {
                     {sub.title}
                     <span>{isOpen ? "▲" : "▼"}</span>
                   </button>
-                  {isOpen && renderSubMenu(sub.submenu, level + 1)}
+                  {isOpen && renderSubMenu(sub.submenu!, level + 1)}
                 </>
               ) : (
                 <Link

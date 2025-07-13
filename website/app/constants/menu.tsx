@@ -18,8 +18,8 @@ export const sidebarMenu = [
     text: "محصولات",
     submenu: [
       {
-        title: "محصولات پر فروش",
-        to: "/products/mostsales",
+        title: "همه ی محصولات",
+        to: "/products/allproducts",
       },
       {
         title: "محصولات برتر",
