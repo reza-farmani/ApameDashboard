@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/app/_lib/supabase";
 
-type FormData = {
+export type FormData = {
   name: string;
   description: string;
   category: string;
@@ -12,6 +12,7 @@ type FormData = {
   productCode: string;
   quantity: number;
   image: FileList;
+  id: string
 };
 
 export default function AddProductPage() {

@@ -2,8 +2,24 @@
 
 import Link from "next/link";
 import { HiTrash, HiPencil } from "react-icons/hi2";
+import { FormData } from '../../(operations)/addproduct/page';
+import Image from "next/image";
 
-export default function ProductsTable({ products }: { products: any[] }) {
+////// create ui components with Arsham /////
+import Button from "@/app/ui/Button";
+import NameProduct from "@/app/ui/Products/NameProduct";
+import DescriptionProduct from "@/app/ui/Products/DescriptionProduct";
+import CategoryProduct from "@/app/ui/Products/CategoryProduct";
+import PriceProduct from "@/app/ui/Products/PriceProduct";
+import CodeProduct from "@/app/ui/Products/CodeProduct";
+import QuantityProduct from "@/app/ui/Products/QuantityProduct";
+import EditProduct from "@/app/ui/Products/EditProduct";
+import IconEdit from '../../../public/images/icon-edit.png';
+import IconDelete from '../../../public/images/Delet-icon.png';
+import DeleteProduct from "@/app/ui/Products/DeleteProduct";
+
+
+export default function ProductsTable({ products }: { products: FormData[] }) {
   async function handleDelete(id: string) {
     const confirmed = confirm("آیا از حذف این محصول مطمئن هستید؟");
     if (!confirmed) return;
@@ -21,71 +37,65 @@ export default function ProductsTable({ products }: { products: any[] }) {
 
   return (
     <main className="p-8">
-      <h1 className="mb-6 text-4xl font-bold text-gray-800">محصولات</h1>
-
-      <div className="mr-28 ml-28 mb-10 rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div className="grid grid-cols-8 bg-gray-50 text-gray-600 text-sm font-semibold px-6 py-3">
+      <div className="flex justify-around ml-[5px]">
+        <h1 className=" text-4xl sans-bold text-[#006BAD] mt-[13px] ml-[200px]">لیست محصولات آپامه</h1>
+        <Button/>
+      </div>
+      <div className="ml-[10%] mb-10 rounded-xl shadow-sm border border-gray-100 overflow-hidden w-[100%]">
+        <div className="grid grid-cols-8 bg-gray-50 text-gray-600 sans-bold justify-center items-center pr-16">
           <div>تصویر</div>
           <div>نام محصول</div>
-          <div>توضیحات</div>
-          <div>دسته‌بندی</div>
-          <div>قیمت</div>
-          <div>کد محصول</div>
-          <div>تعداد</div>
-          <div>عملیات</div>
+          <div className="pr-5">توضیحات</div>
+          <div className="pr-5">دسته‌بندی</div>
+          <div className="pr-5">قیمت</div>
+          <div className="pr-5">کد محصول</div>
+          <div className="pr-5">تعداد</div>
+          <div className="pr-8">عملیات</div>
         </div>
 
         {products?.map((product) => (
           <div
             key={product.id}
-            className="grid grid-cols-8 items-center border-t border-gray-100 px-6 py-4 text-sm"
+            className="grid grid-cols-8 items-center justify-center border-t border-gray-100 mr-10"
           >
             <div>
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-12 h-12 object-cover rounded"
+                className="w-20 h-20 my-5 object-cover rounded"
               />
             </div>
 
-            <div className="font-medium text-gray-900">{product.name}</div>
+            <NameProduct>{product.name}</NameProduct>
 
-            <div className="text-gray-600 pl-8 line-clamp-2">
-              {product.description}
-            </div>
+            <DescriptionProduct> {product.description}</DescriptionProduct>
 
-            <div className="text-gray-600">{product.category}</div>
+            <CategoryProduct>{product.category}</CategoryProduct>
 
-            <div className="text-green-600 font-semibold">${product.price}</div>
+            <PriceProduct>${product.price}</PriceProduct>
 
-            <div className="text-black">{product.productCode}</div>
+            <CodeProduct>{product.productCode}</CodeProduct>
 
-            <div>{product.quantity}</div>
+            <QuantityProduct>{product.quantity}</QuantityProduct>
 
-            <div className="flex gap-2">
-              <Link
-                href={`editproduct/${product.id}`}
-                className="px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded hover:bg-blue-200 transition flex items-center justify-center"
-              >
-                <HiPencil />
-              </Link>
-              <button
-                onClick={() => handleDelete(product.id)}
-                className="px-3 py-1 text-xs bg-red-100 text-red-800 rounded hover:bg-red-200 transition"
-              >
-                <HiTrash />
-              </button>
+            <div className="flex gap-6">
+              <EditProduct>
+                <Link href={`editproduct/${product.id}`} className="w-full h-full flex items-center justify-center">
+                   <Image alt="icon-edit" src={IconEdit} className="w-[25px] h-[25px]"/>
+                </Link>
+              </EditProduct>
+
+              <DeleteProduct>   
+                <button onClick={() => handleDelete(product.id)}className="w-full h-full flex items-center justify-center cursor-pointer">
+                  <Image alt="icon-delete" src={IconDelete} className="w-[25px] h-[25px]"/>
+                </button>
+              </DeleteProduct>
             </div>
           </div>
         ))}
       </div>
 
-      <Link
-        href="/addproduct"
-        className="mt-8 bg-blue-500 p-5 rounded-2xl mr-28 text-white hover:bg-blue-300 cursor-pointer"
-      >
-        اضافه کردن محصول جدید
-      </Link>
+
     </main>
   );
 }

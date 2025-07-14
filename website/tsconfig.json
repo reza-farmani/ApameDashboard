@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/page.tsx", "app/layout.tsx", "app/_components/Header.tsx", "app/hooks/useBreadcrumbSetter.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/page.tsx", "app/layout.tsx", "app/_components/Header.tsx", "app/hooks/useBreadcrumbSetter.ts", "app/_lib/supabase.js"],
   "exclude": ["node_modules"]
 }
