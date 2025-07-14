@@ -32,4 +32,7 @@
     filter: drop-shadow(1px 1px 5px #006bad7c);
   }
 
+  .shadow-normal-button {
+    filter: drop-shadow(1px 1px 3px #0000002f);
+  }
 }

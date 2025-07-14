@@ -3,6 +3,12 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/app/_lib/supabase";
+import AcceptIcon from '../../../public/images/accept-icon.png';
+import Image from "next/image";
+import AcceptProduct from "@/app/ui/addProduct/AcceptProduct";
+import TitlePage from "@/app/ui/addProduct/TitlePage";
+import ImageProduct from "@/app/ui/addProduct/ImageProduct";
+import IconError from '../../../public/images/icon-error.png';
 
 export type FormData = {
   name: string;
@@ -71,36 +77,35 @@ export default function AddProductPage() {
   };
 
   return (
-    <main className="p-8 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">افزودن محصول جدید</h1>
+    <main className="p-8 max-w-2xl mx-auto bg-white shadow rounded-2xl shadow-[#006BAD]">
+      <TitlePage>افزودن محصول جدید</TitlePage>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <input
           {...register("name", { required: "نام محصول الزامی است" })}
           placeholder="نام محصول"
-          className="w-full border p-2 rounded"
+          className='sans-semiBold border-2 w-full text-lg py-[7px] outline-none rounded-xl text-[#006BAD] placeholder:text-[#006BAD] pr-3 border-[#006BAD] ml-[35px]'
         />
-        {errors.name && <p className="text-red-500">{errors.name.message}</p>}
-
+        {errors.name && <div className="flex gap-1 sans-semiBold text-red-500 mt-[-2%] mr-1"><p>{errors.name.message}</p><Image alt="icon-error" src={IconError} className="w-[20px] shadow-normal-button mb-1"/></div> }
         <textarea
           {...register("description", {
             required: "توضیحات الزامی است",
             minLength: { value: 10, message: "حداقل 10 کاراکتر" },
           })}
           placeholder="توضیحات"
-          className="w-full border p-2 rounded"
+          className='sans-semiBold border-2 w-full text-lg py-[7px] outline-none rounded-xl text-[#006BAD] placeholder:text-[#006BAD] pr-3 border-[#006BAD] ml-[35px]'
         />
-        {errors.description && (
-          <p className="text-red-500">{errors.description.message}</p>
-        )}
+        {errors.description && <div className="flex gap-1 sans-semiBold text-red-500 mt-[-2%] mr-1"><p>{errors.description.message}</p><Image alt="icon-error" src={IconError} className="w-[20px] shadow-normal-button mb-1"/></div> }
+
+
 
         <input
           {...register("category", { required: "دسته‌بندی الزامی است" })}
           placeholder="دسته‌بندی"
-          className="w-full border p-2 rounded"
+          className='sans-semiBold border-2 w-full text-lg py-[7px] outline-none rounded-xl text-[#006BAD] placeholder:text-[#006BAD] pr-3 border-[#006BAD] ml-[35px]'
         />
-        {errors.category && (
-          <p className="text-red-500">{errors.category.message}</p>
-        )}
+
+          {errors.category && <div className="flex gap-1 sans-semiBold text-red-500 mt-[-2%] mr-1"><p>{errors.category.message}</p><Image alt="icon-error" src={IconError} className="w-[20px] shadow-normal-button mb-1"/></div> }  
+
 
         <input
           type="number"
@@ -110,18 +115,19 @@ export default function AddProductPage() {
             min: { value: 0, message: "باید مثبت باشد" },
           })}
           placeholder="قیمت"
-          className="w-full border p-2 rounded"
+          className='sans-semiBold border-2 w-full text-lg py-[7px] outline-none rounded-xl text-[#006BAD] placeholder:text-[#006BAD] pr-3 border-[#006BAD] ml-[35px]'
         />
-        {errors.price && <p className="text-red-500">{errors.price.message}</p>}
+        {errors.price && <div className="flex gap-1 sans-semiBold text-red-500 mt-[-2%] mr-1"><p>{errors.price.message}</p><Image alt="icon-error" src={IconError} className="w-[20px] shadow-normal-button mb-1"/></div> }
+
 
         <input
           {...register("productCode", { required: "کد محصول الزامی است" })}
           placeholder="کد محصول"
-          className="w-full border p-2 rounded"
+          className='sans-semiBold border-2 w-full text-lg py-[7px] outline-none rounded-xl text-[#006BAD] placeholder:text-[#006BAD] pr-3 border-[#006BAD] ml-[35px]'
         />
-        {errors.productCode && (
-          <p className="text-red-500">{errors.productCode.message}</p>
-        )}
+
+        {errors.productCode && <div className="flex gap-1 sans-semiBold text-red-500 mt-[-2%] mr-1"><p>{errors.productCode.message}</p><Image alt="icon-error" src={IconError} className="w-[20px] shadow-normal-button mb-1"/></div> }
+
 
         <input
           type="number"
@@ -130,27 +136,27 @@ export default function AddProductPage() {
             min: { value: 1, message: "حداقل 1 عدد" },
           })}
           placeholder="تعداد"
-          className="w-full border p-2 rounded"
+          className='sans-semiBold border-2 w-full text-lg py-[7px] outline-none rounded-xl text-[#006BAD] placeholder:text-[#006BAD] pr-3 border-[#006BAD] ml-[35px]'
         />
-        {errors.quantity && (
-          <p className="text-red-500">{errors.quantity.message}</p>
-        )}
+        {errors.quantity && <div className="flex gap-1 sans-semiBold text-red-500 mt-[-2%] mr-1"><p>{errors.quantity.message}</p><Image alt="icon-error" src={IconError} className="w-[20px] shadow-normal-button mb-1"/></div>}
 
+        <ImageProduct>
         <input
           type="file"
           accept="image/*"
+          placeholder="a"
           {...register("image", { required: "انتخاب تصویر الزامی است" })}
-          className="w-full border p-2 rounded"
+          className="w-[600px] py-14 px-48  absolute text-[#ffffff00]"
         />
-        {errors.image && <p className="text-red-500">{errors.image.message}</p>}
+        
+        </ImageProduct>
 
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
-        >
-          {isSubmitting ? "در حال ارسال..." : "ثبت محصول"}
-        </button>
+        {errors.image && <div className="flex gap-1 sans-semiBold text-red-500 mt-[-2%] mr-1"><p>{errors.image.message}</p><Image alt="icon-error" src={IconError} className="w-[20px] shadow-normal-button mb-1"/></div> }
+
+        <AcceptProduct disabled={{ isSubmitting }}>
+          <span>{isSubmitting ? "در حال ارسال..." : "ثبت محصول"}</span>
+          <Image alt="accept-icon" src={AcceptIcon} className="w-[34px] h-[40px]"/>
+        </AcceptProduct>
       </form>
     </main>
   );
