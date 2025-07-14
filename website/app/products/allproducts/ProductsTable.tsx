@@ -1,5 +1,4 @@
-
-'use client';
+"use client";
 
 import Link from "next/link";
 import { HiTrash, HiPencil } from "react-icons/hi2";
@@ -79,7 +78,7 @@ export default function ProductsTable({ products }: { products: any[] }) {
       </div>
 
       <Link
-        href="/addproduct"
+        href="operations/addproduct"
         className="mt-8 bg-blue-500 p-5 rounded-2xl mr-28 text-white hover:bg-blue-300 cursor-pointer"
       >
         اضافه کردن محصول جدید
