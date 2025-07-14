@@ -54,7 +54,7 @@ export default function AddProductPage() {
     const imageUrl = publicUrlData?.publicUrl || "";
     /////////////////////////////////////////////////////////
 
-    const res = await fetch("/server/addProduct", {
+    const res = await fetch("/api/addProduct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...data, image: imageUrl }),

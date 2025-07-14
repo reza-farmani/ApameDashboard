@@ -8,7 +8,7 @@ export default function ProductsTable({ products }: { products: any[] }) {
     const confirmed = confirm("آیا از حذف این محصول مطمئن هستید؟");
     if (!confirmed) return;
 
-    const res = await fetch(`/server/deleteProduct/${id}`, {
+    const res = await fetch(`/api/deleteProduct/${id}`, {
       method: "DELETE",
     });
 
@@ -63,9 +63,12 @@ export default function ProductsTable({ products }: { products: any[] }) {
             <div>{product.quantity}</div>
 
             <div className="flex gap-2">
-              <button className="px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded hover:bg-blue-200 transition">
+              <Link
+                href={`editproduct/${product.id}`}
+                className="px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded hover:bg-blue-200 transition flex items-center justify-center"
+              >
                 <HiPencil />
-              </button>
+              </Link>
               <button
                 onClick={() => handleDelete(product.id)}
                 className="px-3 py-1 text-xs bg-red-100 text-red-800 rounded hover:bg-red-200 transition"
@@ -78,7 +81,7 @@ export default function ProductsTable({ products }: { products: any[] }) {
       </div>
 
       <Link
-        href="operations/addproduct"
+        href="/addproduct"
         className="mt-8 bg-blue-500 p-5 rounded-2xl mr-28 text-white hover:bg-blue-300 cursor-pointer"
       >
         اضافه کردن محصول جدید
