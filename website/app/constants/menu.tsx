@@ -4,6 +4,7 @@ import {
   HiOutlineHome,
   HiOutlineHomeModern,
   HiOutlineUser,
+  HiOutlineUsers
 } from "react-icons/hi2";
 
 export const sidebarMenu = [
@@ -41,6 +42,17 @@ export const sidebarMenu = [
       {
         title: "افزودن کاربر جدید",
         to: "/user/adduser",
+      },
+    ],
+  },
+    {
+    to: "/customers",
+    icon: HiOutlineUsers,
+    text: "مشتری ها",
+    submenu: [
+      {
+        title: "همه ی مشتری ها",
+        to: "/customers/allcustomers",
       },
     ],
   },

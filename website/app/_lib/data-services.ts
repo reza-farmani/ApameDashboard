@@ -9,9 +9,7 @@ export async function getProducts({
   const from = (page - 1) * pageSize;
   const to = from + pageSize - 1;
 
-  let query = supabase
-    .from("products")
-    .select("*", { count: "exact" });
+  let query = supabase.from("products").select("*", { count: "exact" });
 
   if (search) {
     query = query.ilike("name", `%${search}%`);
@@ -24,13 +22,12 @@ export async function getProducts({
   const { data, count, error } = await query.range(from, to);
 
   if (error) {
-    console.error("Supabase Error:", error.message);
+    console.error("خطا در دریافت داده ها:", error.message);
     return { data: [], count: 0 };
   }
 
   return { data, count: count || 0 };
 }
-
 
 export async function getCategories() {
   const { data, error } = await supabase
@@ -38,10 +35,36 @@ export async function getCategories() {
     .select("category", { distinct: true });
 
   if (error) {
-    console.error("Error fetching categories:", error.message);
+    console.error(" خطا در دریافت داده ها:", error.message);
     return [];
   }
 
-  const uniqueCategories = Array.from(new Set(data.map((item) => item.category).filter(Boolean)));
+  const uniqueCategories = Array.from(
+    new Set(data.map((item) => item.category).filter(Boolean))
+  );
   return uniqueCategories;
+}
+
+export async function getCustomers({
+  page = 1,
+  pageSize = 5,
+  search = "",
+} = {}) {
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  let query = supabase.from("customers").select("*", { count: "exact" });
+
+  if (search) {
+    query = query.ilike("name", `%${search}%`);
+  }
+
+  const { data, count, error } = await query.range(from, to);
+
+  if (error) {
+    console.error("خطا در دریافت داده ها:", error.message);
+    return { data: [], count: 0 };
+  }
+
+  return { data, count: count || 0 };
 }
