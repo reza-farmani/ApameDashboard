@@ -1,12 +1,47 @@
 import { supabase } from "./supabase";
 
-export async function getProducts() {
-  const { data, error } = await supabase.from("products").select("*");
+export async function getProducts({
+  page = 1,
+  pageSize = 5,
+  search = "",
+  category = "all",
+} = {}) {
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
 
-  if (error) {
-    console.error(error);
+  let query = supabase
+    .from("products")
+    .select("*", { count: "exact" });
+
+  if (search) {
+    query = query.ilike("name", `%${search}%`);
   }
 
-  return data;
+  if (category !== "all") {
+    query = query.eq("category", category);
+  }
+
+  const { data, count, error } = await query.range(from, to);
+
+  if (error) {
+    console.error("Supabase Error:", error.message);
+    return { data: [], count: 0 };
+  }
+
+  return { data, count: count || 0 };
 }
 
+
+export async function getCategories() {
+  const { data, error } = await supabase
+    .from("products")
+    .select("category", { distinct: true });
+
+  if (error) {
+    console.error("Error fetching categories:", error.message);
+    return [];
+  }
+
+  const uniqueCategories = Array.from(new Set(data.map((item) => item.category).filter(Boolean)));
+  return uniqueCategories;
+}
