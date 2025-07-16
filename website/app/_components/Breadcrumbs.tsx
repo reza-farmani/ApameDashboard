@@ -10,7 +10,7 @@ export default function Breadcrumbs() {
   return (
     <nav
       dir="rtl"
-      className="text-lg text-gray-800 mb-6 font-bold ml-auto max-w-max"
+      className="sans-semiBold text-gray-800 mb-6  ml-auto max-w-max"
     >
       <ol className="flex flex-row-reverse items-center gap-2">
         {breadcrumb

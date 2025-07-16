@@ -25,7 +25,7 @@ function SideBar() {
                 <>
                   <button
                     onClick={() => toggleMenu(sub.to)}
-                    className="flex items-center justify-between w-full p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded"
+                    className="flex items-center justify-between w-full p-2 text-gray-600 hover:text-white hover:bg-[#006BAD] rounded-lg sans-bold"
                   >
                     {sub.title}
                     <span>{isOpen ? "▲" : "▼"}</span>
@@ -35,7 +35,7 @@ function SideBar() {
               ) : (
                 <Link
                   href={sub.to}
-                  className="block p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded"
+                  className="block p-2 text-gray-600 hover:text-white hover:bg-[#006BAD] rounded-lg sans-bold"
                 >
                   {sub.title}
                 </Link>
@@ -61,7 +61,7 @@ function SideBar() {
                 <>
                   <button
                     onClick={() => toggleMenu(item.to)}
-                    className="flex items-center gap-3 text-gray-600 text-base font-medium p-3 px-6 w-full text-left transition-all duration-300 hover:text-gray-800 hover:bg-gray-100 rounded"
+                    className="flex items-center gap-3 text-gray-600 text-base sans-bold p-3 px-6 w-full cursor-pointer text-left transition-all duration-300 hover:text-white hover:bg-[#006BAD] rounded-lg"
                     type="button"
                   >
                     <item.icon />
@@ -75,7 +75,7 @@ function SideBar() {
               ) : (
                 <Link
                   href={item.to}
-                  className="flex items-center gap-3 text-gray-600 text-base font-medium p-3 px-6 w-full text-left transition-all duration-300 hover:text-gray-800 hover:bg-gray-100 rounded"
+                  className="flex items-center gap-3 text-gray-600 text-base sans-bold p-3 px-6 w-full cursor-pointer text-left transition-all duration-300 hover:text-white hover:bg-[#006BAD] rounded-lg"
                 >
                   <item.icon />
                   <span>{item.text}</span>
