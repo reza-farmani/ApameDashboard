@@ -65,14 +65,14 @@ export default function ProductsTable({ categories }: { categories: string[] }) 
   return (
     <main className="p-8">
       <div className="flex justify-around ml-[5px]">
-        <h1 className="text-4xl sans-bold text-[#006BAD] mt-[13px] ml-[200px]">
+        <h1 className="text-4xl sans-black  text-[#006BAD] mt-[20px] ml-[1080px]">
           لیست محصولات آپامه
         </h1>
-        <Button />
       </div>
+        <Button />
 
 
-      <div className="my-8 flex flex-wrap gap-4 items-center p-4 rounded-lg border border-gray-200">
+      <div className=" flex flex-wrap gap-4 items-center p-4 rounded-lg border border-gray-200 mt-[1%]">
         <input
           type="text"
           placeholder="جستجو نام محصول"
