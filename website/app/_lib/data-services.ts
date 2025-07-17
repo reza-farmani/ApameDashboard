@@ -32,7 +32,8 @@ export async function getProducts({
 export async function getCategories() {
   const { data, error } = await supabase
     .from("products")
-    .select("category", { distinct: true });
+    .select("category")
+    .neq("category", null);
 
   if (error) {
     console.error(" خطا در دریافت داده ها:", error.message);

@@ -1,8 +1,8 @@
 "use client";
 
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 import { useBreadcrumbStore } from "../state/breadcrumpStore";
 import Link from "next/link";
+import { BreadcrumbItem } from "@/types/types";
 
 export default function Breadcrumbs() {
   const breadcrumb = useBreadcrumbStore((s) => s.breadcrumb);
@@ -16,7 +16,7 @@ export default function Breadcrumbs() {
         {breadcrumb
           .slice()
           .reverse()
-          .map((item: { to: Key | null | undefined; title: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) => (
+          .map((item: BreadcrumbItem) => (
             <li key={item.to} className="flex items-center text-lg">
               <span className="mx-2 text-gray-500">/</span>
               <h4 className="hover:underline">

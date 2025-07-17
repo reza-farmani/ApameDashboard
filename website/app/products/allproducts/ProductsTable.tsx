@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -29,7 +29,7 @@ export default function ProductsTable({ categories }: { categories: string[] }) 
   const itemsPerPage = 5;
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     const { data, count } = await getProducts({
       page: currentPage,
@@ -41,11 +41,11 @@ export default function ProductsTable({ categories }: { categories: string[] }) 
     setProducts(data ?? []);
     setTotalCount(count ?? 0);
     setLoading(false);
-  };
+  }, [currentPage, itemsPerPage, search, category]);
 
   useEffect(() => {
     fetchData();
-  }, [currentPage, search, category]);
+  }, [fetchData]);
 
   async function handleDelete(id: string) {
     const confirmed = confirm("آیا از حذف این محصول مطمئن هستید؟");
@@ -125,11 +125,17 @@ export default function ProductsTable({ categories }: { categories: string[] }) 
               className="grid grid-cols-8 items-center justify-center border-t border-gray-100 mr-10"
             >
               <div>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-20 h-20 my-5 object-cover rounded"
-                />
+                {typeof product.image === 'string' && product.image ? (
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-20 h-20 my-5 object-cover rounded"
+                  />
+                ) : (
+                  <div className="w-20 h-20 my-5 object-cover rounded bg-gray-200 flex items-center justify-center text-gray-400">
+                    بدون تصویر
+                  </div>
+                )}
               </div>
 
               <NameProduct>{product.name}</NameProduct>

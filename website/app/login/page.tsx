@@ -40,8 +40,12 @@ export default function Login() {
       const user = await res.json();
       localStorage.setItem('user', JSON.stringify(user));
       router.push('/');
-    } catch (err: any) {
-      setErrorMsg(err.message || 'خطایی رخ داده است');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setErrorMsg(err.message || 'خطایی رخ داده است');
+      } else {
+        setErrorMsg('خطایی رخ داده است');
+      }
     } finally {
       setIsSubmitting(false);
     }

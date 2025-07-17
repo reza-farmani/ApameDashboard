@@ -2,9 +2,14 @@
 import { create } from "zustand";
 import { BreadcrumbItem } from "@/types/types"; 
 
-export const useBreadcrumbStore = create((set) => ({
-  breadcrumb: [] as BreadcrumbItem[],
-  setBreadcrumb: (items: BreadcrumbItem[]) => set({ breadcrumb: items }),
+type BreadcrumbState = {
+  breadcrumb: BreadcrumbItem[];
+  setBreadcrumb: (items: BreadcrumbItem[]) => void;
+};
+
+export const useBreadcrumbStore = create<BreadcrumbState>((set) => ({
+  breadcrumb: [],
+  setBreadcrumb: (items) => set({ breadcrumb: items }),
 }));
 
 

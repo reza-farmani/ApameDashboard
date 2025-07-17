@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -28,7 +28,7 @@ export default function CustomerTable() {
   const itemsPerPage = 5;
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     const { data, count } = await getCustomers({
       page: currentPage,
@@ -39,11 +39,11 @@ export default function CustomerTable() {
     setCustomers(data ?? []);
     setTotalCount(count ?? 0);
     setLoading(false);
-  };
+  }, [currentPage, itemsPerPage, search]);
 
   useEffect(() => {
     fetchData();
-  }, [currentPage, search]);
+  }, [fetchData]);
 
   async function handleDelete(id: string) {
     const confirmed = confirm("آیا از حذف این مشتری مطمئن هستید؟");

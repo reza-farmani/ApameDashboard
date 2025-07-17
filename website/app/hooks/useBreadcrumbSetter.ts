@@ -4,16 +4,36 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useBreadcrumbStore } from "../state/breadcrumpStore";
 import { sidebarMenu } from "../constants/menu";
-import { BreadcrumbItem } from "@/types/types"; 
+import { BreadcrumbItem } from "@/types/types";
+import { IconType } from "react-icons";
+
+type MenuItem = {
+  to: string;
+  icon: IconType;
+  text: string;
+  submenu?: SubMenuItem[];
+};
+type SubMenuItem = {
+  title: string;
+  to: string;
+  submenu?: SubMenuItem[];
+};
+
+type AnyMenuItem = MenuItem | SubMenuItem;
+
+// Type guard to check if item is a submenu item
+function isSubMenuItem(item: AnyMenuItem): item is SubMenuItem {
+  return (item as SubMenuItem).title !== undefined && (item as MenuItem).icon === undefined;
+}
 
 function findBreadcrumb(
   path: string,
-  menu = sidebarMenu,
+  menu: AnyMenuItem[] = sidebarMenu as AnyMenuItem[],
   parents: BreadcrumbItem[] = []
 ): BreadcrumbItem[] {
   for (const item of menu) {
     const current: BreadcrumbItem = {
-      title: item.text ?? item.title,
+      title: isSubMenuItem(item) ? item.title : (item as MenuItem).text,
       to: item.to,
     };
 
@@ -22,7 +42,7 @@ function findBreadcrumb(
     }
 
     if (item.submenu) {
-      const result = findBreadcrumb(path, item.submenu, [...parents, current]);
+      const result = findBreadcrumb(path, item.submenu as AnyMenuItem[], [...parents, current]);
       if (result.length > 0) return result;
     }
   }
@@ -38,5 +58,5 @@ export function useBreadcrumbSetter() {
     setBreadcrumb(crumbs);
     if (crumbs.length)
       document.title = "آپامه - " + crumbs[crumbs.length - 1].title;
-  }, [pathname]);
+  }, [pathname, setBreadcrumb]);
 }

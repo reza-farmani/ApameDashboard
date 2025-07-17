@@ -15,22 +15,28 @@ export const StyledInput = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="w-full max-w-md px-4">
         <Field>
-          <Label className="text-sm/6 font-medium text-white">Name</Label>
+          <Label htmlFor={inputId} className="text-sm/6 font-medium text-white">{label}</Label>
           <Description className="text-sm/6 text-white/50">
             Use your real name so people will recognize you.
           </Description>
           <Input
+            id={inputId}
+            ref={ref}
             className={clsx(
               "mt-3 block w-full rounded-lg border-none bg-white/5 px-3 py-1.5 text-sm/6 text-white",
-              "focus:not-data-focus:outline-none data-focus:outline-2 data-focus:-outline-offset-2 data-focus:outline-white/25"
+              "focus:not-data-focus:outline-none data-focus:outline-2 data-focus:-outline-offset-2 data-focus:outline-white/25",
+              className
             )}
           />
         </Field>
+        {error && (
+          <p className="mt-1 text-sm text-red-500">{error}</p>
+        )}
       </div>
     );
   }
 );
 
-Input.displayName = "Input";
+StyledInput.displayName = "StyledInput";
 
 export default Input;

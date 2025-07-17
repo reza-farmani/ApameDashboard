@@ -51,7 +51,7 @@ function SideBar() {
     <nav>
       <ul className="flex flex-col gap-2">
         {sidebarMenu.map((item) => {
-          const Icon = item.icon;
+          // const Icon = item.icon;
           const hasSubmenu = item.submenu && item.submenu.length > 0;
           const isOpen = openMenus[item.to];
 

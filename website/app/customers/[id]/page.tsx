@@ -19,7 +19,7 @@ export default async function CustomerPage({ params }: Props) {
     return notFound();
   }
 
-  const { data: factors, error: factorsError } = await supabase
+  const { data: factors } = await supabase
     .from("factors")
     .select("*")
     .eq("id", id);

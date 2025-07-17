@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import type { FormData } from "../../(operations)/addproduct/page";
+import type { FormEvent } from "react";
 
 export default function EditProductPage() {
   const { id } = useParams();
   const router = useRouter();
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<FormData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export default function EditProductPage() {
     fetchProduct();
   }, [id]);
 
-  async function handleSubmit(e: any) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     const res = await fetch(`/api/editProduct/${id}`, {
@@ -46,49 +48,49 @@ export default function EditProductPage() {
         <input
           type="text"
           placeholder="نام محصول"
-          value={product.name}
-          onChange={(e) => setProduct({ ...product, name: e.target.value })}
+          value={product?.name}
+          onChange={(e) => setProduct({ ...product!, name: e.target.value })}
           className="w-full p-2 border rounded"
         />
         <textarea
           placeholder="توضیحات"
-          value={product.description}
+          value={product?.description}
           onChange={(e) =>
-            setProduct({ ...product, description: e.target.value })
+            setProduct({ ...product!, description: e.target.value })
           }
           className="w-full p-2 border rounded"
         />
         <input
           type="text"
           placeholder="دسته‌بندی"
-          value={product.category}
-          onChange={(e) => setProduct({ ...product, category: e.target.value })}
+          value={product?.category}
+          onChange={(e) => setProduct({ ...product!, category: e.target.value })}
           className="w-full p-2 border rounded"
         />
         <input
           type="number"
           placeholder="قیمت"
-          value={product.price}
+          value={product?.price}
           onChange={(e) =>
-            setProduct({ ...product, price: Number(e.target.value) })
+            setProduct({ ...product!, price: Number(e.target.value) })
           }
           className="w-full p-2 border rounded"
         />
         <input
           type="text"
           placeholder="کد محصول"
-          value={product.productCode}
+          value={product?.productCode}
           onChange={(e) =>
-            setProduct({ ...product, productCode: e.target.value })
+            setProduct({ ...product!, productCode: e.target.value })
           }
           className="w-full p-2 border rounded"
         />
         <input
           type="number"
           placeholder="تعداد"
-          value={product.quantity}
+          value={product?.quantity}
           onChange={(e) =>
-            setProduct({ ...product, quantity: Number(e.target.value) })
+            setProduct({ ...product!, quantity: Number(e.target.value) })
           }
           className="w-full p-2 border rounded"
         />
