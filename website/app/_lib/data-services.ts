@@ -20,7 +20,6 @@ export async function getProducts({
   }
 
   const { data, count, error } = await query.range(from, to);
-
   if (error) {
     console.error("خطا در دریافت داده ها:", error.message);
     return { data: [], count: 0 };

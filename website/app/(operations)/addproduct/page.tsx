@@ -18,7 +18,8 @@ export type FormData = {
   productCode: string;
   quantity: number;
   image: FileList;
-  id: string
+  id: string;
+  discount: number
 };
 
 export default function AddProductPage() {

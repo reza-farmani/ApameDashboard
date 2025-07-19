@@ -4,7 +4,8 @@ import {
   HiOutlineHome,
   HiOutlineHomeModern,
   HiOutlineUser,
-  HiOutlineUsers
+  HiOutlineUsers,
+  HiPercentBadge
 } from "react-icons/hi2";
 
 export const sidebarMenu = [
@@ -45,7 +46,7 @@ export const sidebarMenu = [
       },
     ],
   },
-    {
+  {
     to: "/customers",
     icon: HiOutlineUsers,
     text: "مشتری ها",
@@ -64,6 +65,17 @@ export const sidebarMenu = [
       {
         title: "افزودن مقاله جدید",
         to: "/blogs/newblog",
+      },
+    ],
+  },
+  {
+    to: "/off",
+    icon: HiPercentBadge,
+    text: "تخفیف ها",
+    submenu: [
+      {
+        title: "افزودن تخفیف جدید",
+        to: "/off/newoff",
       },
     ],
   },

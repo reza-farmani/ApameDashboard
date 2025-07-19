@@ -118,7 +118,7 @@ export default function CustomerTable() {
                     مشاهده جزئیات
                   </Link>
 
-                  <Link href={`/editproduct/${customer.id}`}>
+                  <Link href={`editcustomer/${customer.id}`}>
                     <Image src={IconEdit} alt="ویرایش" width={25} height={25} />
                   </Link>
 

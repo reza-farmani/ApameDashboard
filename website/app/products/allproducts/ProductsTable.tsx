@@ -18,7 +18,11 @@ import DeleteProduct from "@/app/ui/Products/DeleteProduct";
 import IconEdit from "../../../public/images/icon-edit.png";
 import IconDelete from "../../../public/images/Delet-icon.png";
 
-export default function ProductsTable({ categories }: { categories: string[] }) {
+export default function ProductsTable({
+  categories,
+}: {
+  categories: string[];
+}) {
   const [products, setProducts] = useState<FormData[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
@@ -56,7 +60,7 @@ export default function ProductsTable({ categories }: { categories: string[] }) 
     });
 
     if (res.ok) {
-      fetchData(); 
+      fetchData();
     } else {
       alert("خطا در حذف محصول");
     }
@@ -69,8 +73,7 @@ export default function ProductsTable({ categories }: { categories: string[] }) 
           لیست محصولات آپامه
         </h1>
       </div>
-        <Button />
-
+      <Button />
 
       <div className=" flex flex-wrap gap-4 items-center p-4 rounded-lg border border-gray-200 mt-[1%]">
         <input
@@ -101,7 +104,6 @@ export default function ProductsTable({ categories }: { categories: string[] }) 
         </select>
       </div>
 
-
       <div className="ml-[10%] mb-10 rounded-xl shadow-sm border border-gray-100 overflow-hidden w-[100%]">
         <div className="grid grid-cols-8 bg-gray-50 text-gray-600 sans-bold justify-center items-center pr-16">
           <div>تصویر</div>
@@ -125,7 +127,7 @@ export default function ProductsTable({ categories }: { categories: string[] }) 
               className="grid grid-cols-8 items-center justify-center border-t border-gray-100 mr-10"
             >
               <div>
-                {typeof product.image === 'string' && product.image ? (
+                {typeof product.image === "string" && product.image ? (
                   <img
                     src={product.image}
                     alt={product.name}
@@ -141,7 +143,22 @@ export default function ProductsTable({ categories }: { categories: string[] }) 
               <NameProduct>{product.name}</NameProduct>
               <DescriptionProduct>{product.description}</DescriptionProduct>
               <CategoryProduct>{product.category}</CategoryProduct>
-              <PriceProduct>${product.price}</PriceProduct>
+              <PriceProduct>
+                {product.discount && product.discount > 0 ? (
+                  <>
+                    <span className="line-through text-gray-400 mr-2">
+                      ${product.price}
+                    </span>
+                    <span className="text-green-600 font-bold">
+                      $
+                      {Math.floor(product.price * (1 - product.discount / 100))}
+                    </span>
+                  </>
+                ) : (
+                  <>${product.price}</>
+                )}
+              </PriceProduct>
+
               <CodeProduct>{product.productCode}</CodeProduct>
               <QuantityProduct>{product.quantity}</QuantityProduct>
 
@@ -176,7 +193,6 @@ export default function ProductsTable({ categories }: { categories: string[] }) 
           ))
         )}
       </div>
-
 
       {totalPages > 1 && (
         <div className="flex justify-center items-center gap-2 mt-6">
