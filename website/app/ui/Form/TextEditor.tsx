@@ -21,7 +21,7 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({ cmd, icon, value, title }
     <button
       onClick={handleClick}
       title={title}
-      className="px-2 py-1 border rounded mx-1 hover:bg-gray-200"
+      className="px-2 py-1 border rounded mx-1 hover:bg-gray-200 sans-semiBold"
     >
       {icon}
     </button>
@@ -32,7 +32,7 @@ const TextEditor: React.FC = () => {
   const editorRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="w-full max-w-3xl mx-auto mt-8">
+    <div className="w-full max-w-3xl mx-auto mt-8 sans-semiBold">
       <div className="mb-2 border-b pb-2 flex flex-wrap gap-2">
         <ToolbarButton cmd="bold" icon={<FaBold />} title="Bold" />
         <ToolbarButton cmd="italic" icon={<FaItalic />} title="Italic" />
