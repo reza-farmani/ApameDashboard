@@ -2,6 +2,8 @@
 import ButtonBest from "./ui/ButtonBest";
 import InputComponents from "./ui/InputComponents";
 import { FiSearch } from "react-icons/fi";
+import Title from "./ui/Title";
+import TextEditor from "./ui/TextEditor";
 
 
 
@@ -23,6 +25,9 @@ export default function Page() {
         <ButtonBest size="lg" bgcolor="#006BAD" value="درگاه پرداخت" textColor="white"/>
         <br />
         <ButtonBest size="xl" bgcolor="#05a864" value="تایید و ادامه" textColor="white"/>
+
+        <Title value={'arsham'}/>
+        <TextEditor />
       </div>
     </main>
   );
