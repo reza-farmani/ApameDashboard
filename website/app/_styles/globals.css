@@ -15,6 +15,21 @@
   src: url(../../public/fonts/IRANSansX-Black.ttf);
 }
 
+@font-face {
+  font-family: py-bold;
+  src: url(../../public/fonts/Peyda-Bold[@fontbazi].ttf);
+}
+
+@font-face {
+  font-family: py-extrabold;
+  src: url(../../public/fonts/Peyda-ExtraBold[@fontbazi].ttf);
+}
+
+@font-face {
+  font-family: py-black;
+  src: url(../../public/fonts/Peyda-Black[@fontbazi].ttf);
+}
+
 .sans-bold {
   font-family: sans-bold;
 }
@@ -25,6 +40,18 @@
 
 .sans-black {
   font-family: sans-black;
+}
+
+.py-bold {
+  font-family: py-bold;
+}
+
+.py-extrabold {
+  font-family: py-extrabold;
+}
+
+.py-black {
+  font-family: py-black;
 }
 
 @layer utilities {

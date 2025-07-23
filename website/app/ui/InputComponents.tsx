@@ -1,4 +1,5 @@
-// components/Input.js
+"use client"; 
+
 import React, { useState, cloneElement } from 'react';
 import { IconType } from 'react-icons';
 
