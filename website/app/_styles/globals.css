@@ -30,6 +30,11 @@
   src: url(../../public/fonts/Peyda-Black[@fontbazi].ttf);
 }
 
+@font-face {
+  font-family: py-light;
+  src: url(../../public/fonts/peyda-extralight[@fontbazi].ttf);
+}
+
 .sans-bold {
   font-family: sans-bold;
 }
@@ -52,6 +57,10 @@
 
 .py-black {
   font-family: py-black;
+}
+
+.py-light {
+  font-family: py-light;
 }
 
 @layer utilities {

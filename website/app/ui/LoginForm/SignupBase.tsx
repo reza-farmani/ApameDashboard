@@ -26,7 +26,7 @@ const SignupBase = () => {
       <div className='col-span-1 flex flex-col items-center justify-center'>
             <div className='flex items-center justify-center flex-col gap-2'>
                 <Title value="فرم ثبت نام" size="58px" txcolor="#BBDEFB" font="py-bold"/>
-                <Paragraf value='برای ثبت نام مشخصات خود را وارد کنید' size="16px" txcolor="#A6A5A5" font="py-bold"/>
+                <Paragraf value='برای ثبت نام مشخصات خود را وارد کنید' size="16px" txcolor="#A6A5A5" font="py-bold" track="0.1px"/>
             </div>
 
             <div className='flex items-center justify-center gap-10 mt-12'>
@@ -53,7 +53,7 @@ const SignupBase = () => {
             
             <div className='flex items-center justify-center gap-[10px] mt-12'>
               <Line />
-              <Paragraf value='یا ثبت نام کنید با' size="16px" txcolor="#A6A5A5" font="py-bold"/>
+              <Paragraf value='یا ثبت نام کنید با' size="16px" txcolor="#A6A5A5" font="py-bold" track="0.1px"/>
               <Line />
             </div>
 
@@ -65,8 +65,13 @@ const SignupBase = () => {
 
 
 
-        <div className='col-span-1 flex items-center justify-center'>
+        <div className='col-span-1 flex flex-col items-center justify-center'>
             <Image alt='3d-modul' src={ImageBase} className='w-[95%] ml-5'/>
+            <Title value="آپــــامـه قلــب تـپـنـده ی تبـلیـغـات شـمـا" size="40px" txcolor="#FFFFFFD9" font="py-black"/>
+            <div className='flex items-center justify-center gap-7 '>
+                <Paragraf value='AGENCY' size="22px" txcolor="#A6A5A5" font="py-light" track="10px"/>
+                <Paragraf value='APAME' size="22px" txcolor="#A6A5A5" font="py-light" track="10px"/>
+              </div>
         </div>
     </div>
 
