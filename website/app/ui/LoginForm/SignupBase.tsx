@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
-import ThreeDImage from '../../../public/images/3DObject.png'; 
+// import ThreeDImage from '../../../public/images/3DObject.png'; 
+import ImageBase from '../../../public/images/Rectangle 66.png'; 
 import Title from './Title';
 import Paragraf from './Paragraf';
 import Input from './Input';
@@ -65,7 +66,7 @@ const SignupBase = () => {
 
 
         <div className='col-span-1 flex items-center justify-center'>
-            <Image alt='3d-modul' src={ThreeDImage} className='w-[70%]'/>
+            <Image alt='3d-modul' src={ImageBase} className='w-[95%] ml-5'/>
         </div>
     </div>
 
