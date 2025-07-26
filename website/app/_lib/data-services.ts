@@ -68,3 +68,29 @@ export async function getCustomers({
 
   return { data, count: count || 0 };
 }
+
+export type Setting = {
+  name: any;
+  id: number;
+  key: string;
+  value: string;
+};
+
+const allowedNames = ["minmaxVisitCard", "workingHours", "maxAcceptOrder"];
+
+export async function fetchSettings(): Promise<Setting[]> {
+  const { data, error } = await supabase
+    .from("settings")
+    .select("*")
+    .in("name", allowedNames);
+
+  if (error) throw new Error(error.message);
+  return data || [];
+}
+
+export async function updateSettings(updates: { id: number; value: string }[]) {
+  const updatePromises = updates.map((u) =>
+    supabase.from("settings").update({ value: u.value }).eq("id", u.id)
+  );
+  await Promise.all(updatePromises);
+}

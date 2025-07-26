@@ -5,12 +5,13 @@ import {
   HiOutlineHomeModern,
   HiOutlineUser,
   HiOutlineUsers,
-  HiPercentBadge
+  HiPercentBadge,
+  HiCalendar,
 } from "react-icons/hi2";
 
 export const sidebarMenu = [
   {
-    to: "/home",
+    to: "/",
     icon: HiOutlineHome,
     text: "داشبورد",
   },
@@ -76,6 +77,17 @@ export const sidebarMenu = [
       {
         title: "افزودن تخفیف جدید",
         to: "/off/newoff",
+      },
+    ],
+  },
+  {
+    to: "/calendar",
+    icon: HiCalendar,
+    text: "تقویم",
+    submenu: [
+      {
+        title: "همه ی ایونت ها",
+        to: "/calendar/allevents",
       },
     ],
   },

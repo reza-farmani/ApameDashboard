@@ -39,6 +39,29 @@ export default function OffForm({ categories }: OffFormProps) {
     }
   };
 
+  const handleDeleteAll = async () => {
+    try {
+      const res = await fetch("/api/deleteAllDiscounts", {
+        method: "POST",
+      });
+
+      if (!res.ok) {
+        setResult("خطا در پاسخ از سرور");
+        return;
+      }
+
+      const result = await res.json();
+
+      if (result.success) {
+        setResult("تمام تخفیف‌ها با موفقیت حذف شدند.");
+      } else {
+        setResult("خطا در حذف تخفیف‌ها: " + result.message);
+      }
+    } catch (err) {
+      setResult("خطا در برقراری ارتباط با سرور.");
+    }
+  };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -90,6 +113,14 @@ export default function OffForm({ categories }: OffFormProps) {
         className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
       >
         ثبت تخفیف
+      </button>
+
+      <button
+        type="button"
+        onClick={handleDeleteAll}
+        className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded"
+      >
+        حذف همه تخفیف‌ها
       </button>
 
       {result && <p className="text-green-600 font-medium mt-2">{result}</p>}

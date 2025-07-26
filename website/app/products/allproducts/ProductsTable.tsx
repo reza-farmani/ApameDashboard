@@ -17,6 +17,16 @@ import EditProduct from "@/app/ui/Products/EditProduct";
 import DeleteProduct from "@/app/ui/Products/DeleteProduct";
 import IconEdit from "../../../public/images/icon-edit.png";
 import IconDelete from "../../../public/images/Delet-icon.png";
+import { HiPercentBadge } from "react-icons/hi2";
+
+import DiscountModal from "@/app/ui/Products/DiscountModal"; 
+import { supabase } from "@/app/_lib/supabase";
+
+type DiscountFormData = {
+  discount: number;
+  minPrice: number;
+  maxPrice: number;
+};
 
 export default function ProductsTable({
   categories,
@@ -29,6 +39,11 @@ export default function ProductsTable({
   const [category, setCategory] = useState("all");
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(false);
+
+  const [discountModalOpen, setDiscountModalOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(
+    null
+  );
 
   const itemsPerPage = 5;
   const totalPages = Math.ceil(totalCount / itemsPerPage);
@@ -64,6 +79,57 @@ export default function ProductsTable({
     } else {
       alert("خطا در حذف محصول");
     }
+  }
+
+  function openDiscountModal(productId: string) {
+    setSelectedProductId(productId);
+    setDiscountModalOpen(true);
+  }
+
+  async function handleDiscountSubmit(data: DiscountFormData) {
+    if (!selectedProductId) return;
+
+    const { discount, minPrice, maxPrice } = data;
+
+    const { error } = await supabase
+      .from("products")
+      .update({ discount })
+      .eq("id", selectedProductId);
+
+    if (error) {
+      alert("خطا در اعمال تخفیف");
+      console.error(error.message);
+      return;
+    }
+
+    alert("تخفیف با موفقیت اعمال شد");
+    setDiscountModalOpen(false);
+    setSelectedProductId(null);
+    fetchData();
+  }
+
+  // حذف تخفیف (تنظیم discount به null)
+  async function handleDeleteDiscount() {
+    if (!selectedProductId) return;
+
+    const confirmed = confirm("آیا از حذف تخفیف مطمئن هستید؟");
+    if (!confirmed) return;
+
+    const { error } = await supabase
+      .from("products")
+      .update({ discount: null })
+      .eq("id", selectedProductId);
+
+    if (error) {
+      alert("خطا در حذف تخفیف");
+      console.error(error.message);
+      return;
+    }
+
+    alert("تخفیف با موفقیت حذف شد");
+    setDiscountModalOpen(false);
+    setSelectedProductId(null);
+    fetchData();
   }
 
   return (
@@ -188,6 +254,15 @@ export default function ProductsTable({
                     />
                   </button>
                 </DeleteProduct>
+
+
+                <button
+                  title="اعمال یا حذف تخفیف"
+                  onClick={() => openDiscountModal(product.id)}
+                  className="text-4xl text-blue-500 hover:text-blue-700"
+                >
+                  <HiPercentBadge />
+                </button>
               </div>
             </div>
           ))
@@ -227,6 +302,17 @@ export default function ProductsTable({
           </button>
         </div>
       )}
+
+
+      <DiscountModal
+        isOpen={discountModalOpen}
+        onClose={() => {
+          setDiscountModalOpen(false);
+          setSelectedProductId(null);
+        }}
+        onSubmitDiscount={handleDiscountSubmit}
+        onDeleteDiscount={handleDeleteDiscount}
+      />
     </main>
   );
 }
