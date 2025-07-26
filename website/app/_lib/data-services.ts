@@ -69,6 +69,13 @@ export async function getCustomers({
   return { data, count: count || 0 };
 }
 
+export async function getTodo() {
+  const { data, error } = await supabase.from("todo").select("*");
+
+  if (error) throw new Error(error.message);
+  return data ;
+}
+
 export type Setting = {
   name: any;
   id: number;
@@ -85,7 +92,7 @@ export async function fetchSettings(): Promise<Setting[]> {
     .in("name", allowedNames);
 
   if (error) throw new Error(error.message);
-  return data || [];
+  return data ;
 }
 
 export async function updateSettings(updates: { id: number; value: string }[]) {
